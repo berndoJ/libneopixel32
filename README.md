@@ -16,6 +16,10 @@ If you are using Windows, I prefer using Ubuntu running on WSL to get a Linux bu
 
 If you have any questions, feel free to contact me via Issues or via email (See my profile for the address).
 
+## Future Updates
+
+I plan to update this library occasionally and fixing bugs brought to me via the Issues tab on GitHub. All planned future features are layed out in the Projects tab of this repository. If you wish to add a new feature, just create an issue on this repo or create a pull request.
+
 ## License
 
 This library is MIT-licensed, so feel free to use it.
