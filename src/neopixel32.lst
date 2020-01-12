@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cckPzBQj.s 			page 1
+ARM GAS  /tmp/ccGbDiCE.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -12,806 +12,797 @@ ARM GAS  /tmp/cckPzBQj.s 			page 1
    9              		.eabi_attribute 34, 1
   10              		.eabi_attribute 18, 4
   11              		.file	"neopixel32.c"
-  12              		.section	.text.NP32_Init,"ax",%progbits
-  13              		.align	1
-  14              		.global	NP32_Init
-  15              		.syntax unified
-  16              		.thumb
-  17              		.thumb_func
-  18              		.fpu softvfp
-  20              	NP32_Init:
-  21              		@ args = 0, pretend = 0, frame = 0
-  22              		@ frame_needed = 0, uses_anonymous_args = 0
-  23 0000 38B5     		push	{r3, r4, r5, lr}
-  24 0002 0588     		ldrh	r5, [r0]
-  25 0004 0446     		mov	r4, r0
-  26 0006 15B9     		cbnz	r5, .L2
-  27              	.L4:
-  28 0008 4FF0FF30 		mov	r0, #-1
-  29 000c 38BD     		pop	{r3, r4, r5, pc}
-  30              	.L2:
-  31 000e 0321     		movs	r1, #3
-  32 0010 2846     		mov	r0, r5
-  33 0012 FFF7FEFF 		bl	calloc
-  34 0016 6060     		str	r0, [r4, #4]
-  35 0018 0028     		cmp	r0, #0
-  36 001a F5D0     		beq	.L4
-  37 001c 1820     		movs	r0, #24
-  38 001e 6843     		muls	r0, r5, r0
-  39 0020 0221     		movs	r1, #2
-  40 0022 3030     		adds	r0, r0, #48
-  41 0024 FFF7FEFF 		bl	calloc
-  42 0028 E060     		str	r0, [r4, #12]
-  43 002a 0028     		cmp	r0, #0
-  44 002c ECD0     		beq	.L4
-  45 002e 6069     		ldr	r0, [r4, #20]
-  46 0030 B0FA80F0 		clz	r0, r0
-  47 0034 4009     		lsrs	r0, r0, #5
-  48 0036 4042     		negs	r0, r0
-  49 0038 38BD     		pop	{r3, r4, r5, pc}
-  51              		.section	.text.NP32_DeInit,"ax",%progbits
-  52              		.align	1
-  53              		.global	NP32_DeInit
-  54              		.syntax unified
-  55              		.thumb
-  56              		.thumb_func
-  57              		.fpu softvfp
-  59              	NP32_DeInit:
-  60              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  /tmp/cckPzBQj.s 			page 2
+  12              		.text
+  13              		.section	.text.NP32_Init,"ax",%progbits
+  14              		.align	1
+  15              		.global	NP32_Init
+  16              		.arch armv7-m
+  17              		.syntax unified
+  18              		.thumb
+  19              		.thumb_func
+  20              		.fpu softvfp
+  22              	NP32_Init:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 38B5     		push	{r3, r4, r5, lr}
+  26 0002 0588     		ldrh	r5, [r0]
+  27 0004 0446     		mov	r4, r0
+  28 0006 15B9     		cbnz	r5, .L2
+  29              	.L4:
+  30 0008 4FF0FF30 		mov	r0, #-1
+  31              	.L3:
+  32 000c 38BD     		pop	{r3, r4, r5, pc}
+  33              	.L2:
+  34 000e 0321     		movs	r1, #3
+  35 0010 2846     		mov	r0, r5
+  36 0012 FFF7FEFF 		bl	calloc
+  37 0016 6060     		str	r0, [r4, #4]
+  38 0018 0028     		cmp	r0, #0
+  39 001a F5D0     		beq	.L4
+  40 001c 1820     		movs	r0, #24
+  41 001e 6843     		muls	r0, r5, r0
+  42 0020 0221     		movs	r1, #2
+  43 0022 3030     		adds	r0, r0, #48
+  44 0024 FFF7FEFF 		bl	calloc
+  45 0028 E060     		str	r0, [r4, #12]
+  46 002a 0028     		cmp	r0, #0
+  47 002c ECD0     		beq	.L4
+  48 002e 6069     		ldr	r0, [r4, #20]
+  49 0030 B0FA80F0 		clz	r0, r0
+  50 0034 4009     		lsrs	r0, r0, #5
+  51 0036 4042     		rsbs	r0, r0, #0
+  52 0038 E8E7     		b	.L3
+  54              		.section	.text.NP32_DeInit,"ax",%progbits
+  55              		.align	1
+  56              		.global	NP32_DeInit
+  57              		.syntax unified
+  58              		.thumb
+  59              		.thumb_func
+ARM GAS  /tmp/ccGbDiCE.s 			page 2
 
 
-  61              		@ frame_needed = 0, uses_anonymous_args = 0
-  62 0000 10B5     		push	{r4, lr}
-  63 0002 0446     		mov	r4, r0
-  64 0004 4068     		ldr	r0, [r0, #4]
-  65 0006 FFF7FEFF 		bl	free
-  66 000a E068     		ldr	r0, [r4, #12]
-  67 000c FFF7FEFF 		bl	free
-  68 0010 0023     		movs	r3, #0
-  69 0012 2380     		strh	r3, [r4]	@ movhi
-  70 0014 10BD     		pop	{r4, pc}
-  72              		.section	.text.NP32_Update,"ax",%progbits
-  73              		.align	1
-  74              		.global	NP32_Update
-  75              		.syntax unified
-  76              		.thumb
-  77              		.thumb_func
-  78              		.fpu softvfp
-  80              	NP32_Update:
-  81              		@ args = 0, pretend = 0, frame = 0
-  82              		@ frame_needed = 0, uses_anonymous_args = 0
-  83 0000 2DE9F843 		push	{r3, r4, r5, r6, r7, r8, r9, lr}
-  84 0004 4568     		ldr	r5, [r0, #4]
-  85 0006 002D     		cmp	r5, #0
-  86 0008 7CD0     		beq	.L29
-  87 000a C468     		ldr	r4, [r0, #12]
-  88 000c 002C     		cmp	r4, #0
-  89 000e 79D0     		beq	.L29
-  90              	.L33:
-  91 0010 027C     		ldrb	r2, [r0, #16]	@ zero_extendqisi2
-  92 0012 02F0FF03 		and	r3, r2, #255
-  93 0016 002A     		cmp	r2, #0
-  94 0018 FAD1     		bne	.L33
-  95 001a 027A     		ldrb	r2, [r0, #8]	@ zero_extendqisi2
-  96 001c 012A     		cmp	r2, #1
-  97 001e 0DD0     		beq	.L15
-  98 0020 1A46     		mov	r2, r3
-  99              	.L16:
- 100 0022 0188     		ldrh	r1, [r0]
- 101 0024 9142     		cmp	r1, r2
- 102 0026 24D8     		bhi	.L25
- 103 0028 0022     		movs	r2, #0
- 104 002a 1546     		mov	r5, r2
- 105              	.L26:
- 106 002c 9918     		adds	r1, r3, r2
- 107 002e 0132     		adds	r2, r2, #1
- 108 0030 89B2     		uxth	r1, r1
- 109 0032 302A     		cmp	r2, #48
- 110 0034 24F81150 		strh	r5, [r4, r1, lsl #1]	@ movhi
- 111 0038 F8D1     		bne	.L26
- 112 003a 09E0     		b	.L27
- 113              	.L15:
- 114 003c 1825     		movs	r5, #24
- 115 003e 1E46     		mov	r6, r3
- 116              	.L17:
- 117 0040 0288     		ldrh	r2, [r0]
- 118 0042 99B2     		uxth	r1, r3
- 119 0044 6A43     		muls	r2, r5, r2
-ARM GAS  /tmp/cckPzBQj.s 			page 3
+  60              		.fpu softvfp
+  62              	NP32_DeInit:
+  63              		@ args = 0, pretend = 0, frame = 0
+  64              		@ frame_needed = 0, uses_anonymous_args = 0
+  65 0000 10B5     		push	{r4, lr}
+  66 0002 0446     		mov	r4, r0
+  67 0004 4068     		ldr	r0, [r0, #4]
+  68 0006 FFF7FEFF 		bl	free
+  69 000a E068     		ldr	r0, [r4, #12]
+  70 000c FFF7FEFF 		bl	free
+  71 0010 0023     		movs	r3, #0
+  72 0012 2380     		strh	r3, [r4]	@ movhi
+  73 0014 10BD     		pop	{r4, pc}
+  75              		.section	.text.NP32_Update,"ax",%progbits
+  76              		.align	1
+  77              		.global	NP32_Update
+  78              		.syntax unified
+  79              		.thumb
+  80              		.thumb_func
+  81              		.fpu softvfp
+  83              	NP32_Update:
+  84              		@ args = 0, pretend = 0, frame = 0
+  85              		@ frame_needed = 0, uses_anonymous_args = 0
+  86 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+  87 0004 4568     		ldr	r5, [r0, #4]
+  88 0006 0446     		mov	r4, r0
+  89 0008 002D     		cmp	r5, #0
+  90 000a 7AD0     		beq	.L28
+  91 000c C068     		ldr	r0, [r0, #12]
+  92 000e 0028     		cmp	r0, #0
+  93 0010 77D0     		beq	.L28
+  94              	.L14:
+  95 0012 227C     		ldrb	r2, [r4, #16]	@ zero_extendqisi2
+  96 0014 02F0FF03 		and	r3, r2, #255
+  97 0018 002A     		cmp	r2, #0
+  98 001a FAD1     		bne	.L14
+  99 001c 227A     		ldrb	r2, [r4, #8]	@ zero_extendqisi2
+ 100 001e 012A     		cmp	r2, #1
+ 101 0020 26D0     		beq	.L29
+ 102 0022 1A46     		mov	r2, r3
+ 103              	.L16:
+ 104 0024 2188     		ldrh	r1, [r4]
+ 105 0026 9142     		cmp	r1, r2
+ 106 0028 25D8     		bhi	.L25
+ 107 002a 0025     		movs	r5, #0
+ 108 002c 03F13002 		add	r2, r3, #48
+ 109 0030 92B2     		uxth	r2, r2
+ 110              	.L26:
+ 111 0032 1946     		mov	r1, r3
+ 112 0034 0133     		adds	r3, r3, #1
+ 113 0036 9BB2     		uxth	r3, r3
+ 114 0038 9342     		cmp	r3, r2
+ 115 003a 20F81150 		strh	r5, [r0, r1, lsl #1]	@ movhi
+ 116 003e F8D1     		bne	.L26
+ 117 0040 09E0     		b	.L18
+ 118              	.L17:
+ 119 0042 20F81160 		strh	r6, [r0, r1, lsl #1]	@ movhi
+ARM GAS  /tmp/ccGbDiCE.s 			page 3
 
 
- 120 0046 3032     		adds	r2, r2, #48
- 121 0048 8A42     		cmp	r2, r1
- 122 004a 03F10103 		add	r3, r3, #1
- 123 004e 0DD8     		bhi	.L18
- 124              	.L27:
- 125 0050 0123     		movs	r3, #1
- 126 0052 0188     		ldrh	r1, [r0]
- 127 0054 0374     		strb	r3, [r0, #16]
- 128 0056 01EB4101 		add	r1, r1, r1, lsl #1
- 129 005a C900     		lsls	r1, r1, #3
- 130 005c 3031     		adds	r1, r1, #48
- 131 005e 4369     		ldr	r3, [r0, #20]
- 132 0060 89B2     		uxth	r1, r1
- 133 0062 2046     		mov	r0, r4
- 134 0064 9847     		blx	r3
- 135 0066 0020     		movs	r0, #0
- 136 0068 BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
- 137              	.L18:
- 138 006c 24F81160 		strh	r6, [r4, r1, lsl #1]	@ movhi
- 139 0070 E6E7     		b	.L17
- 140              	.L25:
- 141 0072 02EB4206 		add	r6, r2, r2, lsl #1
- 142 0076 A919     		adds	r1, r5, r6
- 143 0078 91F80180 		ldrb	r8, [r1, #1]	@ zero_extendqisi2
- 144 007c 8F78     		ldrb	r7, [r1, #2]	@ zero_extendqisi2
- 145 007e 0721     		movs	r1, #7
- 146 0080 15F806E0 		ldrb	lr, [r5, r6]	@ zero_extendqisi2
- 147 0084 03EB0109 		add	r9, r3, r1
- 148              	.L20:
- 149 0088 48FA01FC 		asr	ip, r8, r1
- 150 008c 1CF0010F 		tst	ip, #1
- 151 0090 0CBF     		ite	eq
- 152 0092 4FF01C0C 		moveq	ip, #28
- 153 0096 4FF0320C 		movne	ip, #50
- 154 009a A9EB0106 		sub	r6, r9, r1
- 155 009e B6B2     		uxth	r6, r6
- 156 00a0 11F1FF31 		adds	r1, r1, #-1
- 157 00a4 24F816C0 		strh	ip, [r4, r6, lsl #1]	@ movhi
- 158 00a8 EED2     		bcs	.L20
- 159 00aa 0721     		movs	r1, #7
- 160 00ac 03F10F08 		add	r8, r3, #15
- 161              	.L22:
- 162 00b0 4EFA01FC 		asr	ip, lr, r1
- 163 00b4 1CF0010F 		tst	ip, #1
- 164 00b8 0CBF     		ite	eq
- 165 00ba 4FF01C0C 		moveq	ip, #28
- 166 00be 4FF0320C 		movne	ip, #50
- 167 00c2 A8EB0106 		sub	r6, r8, r1
- 168 00c6 B6B2     		uxth	r6, r6
- 169 00c8 11F1FF31 		adds	r1, r1, #-1
- 170 00cc 24F816C0 		strh	ip, [r4, r6, lsl #1]	@ movhi
- 171 00d0 EED2     		bcs	.L22
- 172 00d2 0721     		movs	r1, #7
- 173 00d4 03F1170C 		add	ip, r3, #23
- 174              	.L24:
- 175 00d8 47FA01FE 		asr	lr, r7, r1
- 176 00dc 1EF0010F 		tst	lr, #1
-ARM GAS  /tmp/cckPzBQj.s 			page 4
+ 120              	.L15:
+ 121 0046 2288     		ldrh	r2, [r4]
+ 122 0048 99B2     		uxth	r1, r3
+ 123 004a 6A43     		muls	r2, r5, r2
+ 124 004c 3032     		adds	r2, r2, #48
+ 125 004e 8A42     		cmp	r2, r1
+ 126 0050 03F10103 		add	r3, r3, #1
+ 127 0054 F5D8     		bhi	.L17
+ 128              	.L18:
+ 129 0056 0123     		movs	r3, #1
+ 130 0058 2188     		ldrh	r1, [r4]
+ 131 005a 2374     		strb	r3, [r4, #16]
+ 132 005c 01EB4101 		add	r1, r1, r1, lsl #1
+ 133 0060 C900     		lsls	r1, r1, #3
+ 134 0062 3031     		adds	r1, r1, #48
+ 135 0064 6369     		ldr	r3, [r4, #20]
+ 136 0066 89B2     		uxth	r1, r1
+ 137 0068 9847     		blx	r3
+ 138 006a 0020     		movs	r0, #0
+ 139              	.L13:
+ 140 006c BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 141              	.L29:
+ 142 0070 1825     		movs	r5, #24
+ 143 0072 1E46     		mov	r6, r3
+ 144 0074 E7E7     		b	.L15
+ 145              	.L25:
+ 146 0076 02EB4206 		add	r6, r2, r2, lsl #1
+ 147 007a A919     		adds	r1, r5, r6
+ 148 007c 91F80180 		ldrb	r8, [r1, #1]	@ zero_extendqisi2
+ 149 0080 8F78     		ldrb	r7, [r1, #2]	@ zero_extendqisi2
+ 150 0082 0021     		movs	r1, #0
+ 151 0084 15F806E0 		ldrb	lr, [r5, r6]	@ zero_extendqisi2
+ 152              	.L20:
+ 153 0088 C1F1070C 		rsb	ip, r1, #7
+ 154 008c 48FA0CFC 		asr	ip, r8, ip
+ 155 0090 1CF0010F 		tst	ip, #1
+ 156 0094 14BF     		ite	ne
+ 157 0096 4FF0320C 		movne	ip, #50
+ 158 009a 4FF01C0C 		moveq	ip, #28
+ 159 009e 5E18     		adds	r6, r3, r1
+ 160 00a0 0131     		adds	r1, r1, #1
+ 161 00a2 B6B2     		uxth	r6, r6
+ 162 00a4 0829     		cmp	r1, #8
+ 163 00a6 20F816C0 		strh	ip, [r0, r6, lsl #1]	@ movhi
+ 164 00aa EDD1     		bne	.L20
+ 165 00ac 0721     		movs	r1, #7
+ 166 00ae 03F10F08 		add	r8, r3, #15
+ 167              	.L22:
+ 168 00b2 4EFA01FC 		asr	ip, lr, r1
+ 169 00b6 1CF0010F 		tst	ip, #1
+ 170 00ba 14BF     		ite	ne
+ 171 00bc 4FF0320C 		movne	ip, #50
+ 172 00c0 4FF01C0C 		moveq	ip, #28
+ 173 00c4 A8EB0106 		sub	r6, r8, r1
+ 174 00c8 B6B2     		uxth	r6, r6
+ 175 00ca 0139     		subs	r1, r1, #1
+ 176 00cc 20F816C0 		strh	ip, [r0, r6, lsl #1]	@ movhi
+ARM GAS  /tmp/ccGbDiCE.s 			page 4
 
 
- 177 00e0 0CBF     		ite	eq
- 178 00e2 4FF01C0E 		moveq	lr, #28
- 179 00e6 4FF0320E 		movne	lr, #50
- 180 00ea ACEB0106 		sub	r6, ip, r1
- 181 00ee B6B2     		uxth	r6, r6
- 182 00f0 11F1FF31 		adds	r1, r1, #-1
- 183 00f4 24F816E0 		strh	lr, [r4, r6, lsl #1]	@ movhi
- 184 00f8 EED2     		bcs	.L24
- 185 00fa 1833     		adds	r3, r3, #24
- 186 00fc 0132     		adds	r2, r2, #1
- 187 00fe 9BB2     		uxth	r3, r3
- 188 0100 92B2     		uxth	r2, r2
- 189 0102 8EE7     		b	.L16
- 190              	.L29:
- 191 0104 4FF0FF30 		mov	r0, #-1
- 192 0108 BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
- 194              		.section	.text.NP32_DMAComplete_Callback,"ax",%progbits
- 195              		.align	1
- 196              		.global	NP32_DMAComplete_Callback
- 197              		.syntax unified
- 198              		.thumb
- 199              		.thumb_func
- 200              		.fpu softvfp
- 202              	NP32_DMAComplete_Callback:
- 203              		@ args = 0, pretend = 0, frame = 0
- 204              		@ frame_needed = 0, uses_anonymous_args = 0
- 205              		@ link register save eliminated.
- 206 0000 037C     		ldrb	r3, [r0, #16]	@ zero_extendqisi2
- 207 0002 0BB1     		cbz	r3, .L39
- 208 0004 0023     		movs	r3, #0
- 209 0006 0374     		strb	r3, [r0, #16]
- 210              	.L39:
- 211 0008 7047     		bx	lr
- 213              		.section	.text.NP32_HSV_To_RGB,"ax",%progbits
- 214              		.align	1
- 215              		.global	NP32_HSV_To_RGB
- 216              		.syntax unified
- 217              		.thumb
- 218              		.thumb_func
- 219              		.fpu softvfp
- 221              	NP32_HSV_To_RGB:
- 222              		@ args = 0, pretend = 0, frame = 8
- 223              		@ frame_needed = 0, uses_anonymous_args = 0
- 224 0000 F7B5     		push	{r0, r1, r2, r4, r5, r6, r7, lr}
- 225 0002 40F26712 		movw	r2, #359
- 226 0006 83B2     		uxth	r3, r0
- 227 0008 9342     		cmp	r3, r2
- 228 000a 28BF     		it	cs
- 229 000c 1346     		movcs	r3, r2
- 230 000e C0F30745 		ubfx	r5, r0, #16, #8
- 231 0012 642D     		cmp	r5, #100
- 232 0014 4FEA1060 		lsr	r0, r0, #24
- 233 0018 28BF     		it	cs
- 234 001a 6425     		movcs	r5, #100
- 235 001c 6428     		cmp	r0, #100
- 236 001e 28BF     		it	cs
- 237 0020 6420     		movcs	r0, #100
-ARM GAS  /tmp/cckPzBQj.s 			page 5
+ 177 00d0 EFD2     		bcs	.L22
+ 178 00d2 0721     		movs	r1, #7
+ 179 00d4 03F1170E 		add	lr, r3, #23
+ 180              	.L24:
+ 181 00d8 47FA01FC 		asr	ip, r7, r1
+ 182 00dc 1CF0010F 		tst	ip, #1
+ 183 00e0 14BF     		ite	ne
+ 184 00e2 4FF0320C 		movne	ip, #50
+ 185 00e6 4FF01C0C 		moveq	ip, #28
+ 186 00ea AEEB0106 		sub	r6, lr, r1
+ 187 00ee B6B2     		uxth	r6, r6
+ 188 00f0 0139     		subs	r1, r1, #1
+ 189 00f2 20F816C0 		strh	ip, [r0, r6, lsl #1]	@ movhi
+ 190 00f6 EFD2     		bcs	.L24
+ 191 00f8 1833     		adds	r3, r3, #24
+ 192 00fa 0132     		adds	r2, r2, #1
+ 193 00fc 9BB2     		uxth	r3, r3
+ 194 00fe 92B2     		uxth	r2, r2
+ 195 0100 90E7     		b	.L16
+ 196              	.L28:
+ 197 0102 4FF0FF30 		mov	r0, #-1
+ 198 0106 B1E7     		b	.L13
+ 200              		.section	.text.NP32_DMAComplete_Callback,"ax",%progbits
+ 201              		.align	1
+ 202              		.global	NP32_DMAComplete_Callback
+ 203              		.syntax unified
+ 204              		.thumb
+ 205              		.thumb_func
+ 206              		.fpu softvfp
+ 208              	NP32_DMAComplete_Callback:
+ 209              		@ args = 0, pretend = 0, frame = 0
+ 210              		@ frame_needed = 0, uses_anonymous_args = 0
+ 211              		@ link register save eliminated.
+ 212 0000 037C     		ldrb	r3, [r0, #16]	@ zero_extendqisi2
+ 213 0002 0BB1     		cbz	r3, .L38
+ 214 0004 0023     		movs	r3, #0
+ 215 0006 0374     		strb	r3, [r0, #16]
+ 216              	.L38:
+ 217 0008 7047     		bx	lr
+ 219              		.section	.text.NP32_HSV_To_RGB,"ax",%progbits
+ 220              		.align	1
+ 221              		.global	NP32_HSV_To_RGB
+ 222              		.syntax unified
+ 223              		.thumb
+ 224              		.thumb_func
+ 225              		.fpu softvfp
+ 227              	NP32_HSV_To_RGB:
+ 228              		@ args = 0, pretend = 0, frame = 8
+ 229              		@ frame_needed = 0, uses_anonymous_args = 0
+ 230 0000 40F26713 		movw	r3, #359
+ 231 0004 F7B5     		push	{r0, r1, r2, r4, r5, r6, r7, lr}
+ 232 0006 C0F30744 		ubfx	r4, r0, #16, #8
+ 233 000a 020E     		lsrs	r2, r0, #24
+ 234 000c 642C     		cmp	r4, #100
+ 235 000e 86B2     		uxth	r6, r0
+ 236 0010 28BF     		it	cs
+ 237 0012 6424     		movcs	r4, #100
+ARM GAS  /tmp/ccGbDiCE.s 			page 5
 
 
- 238 0022 3C2B     		cmp	r3, #60
- 239 0024 34D8     		bhi	.L45
- 240 0026 FF22     		movs	r2, #255
- 241 0028 0A70     		strb	r2, [r1]
- 242 002a 40F2A912 		movw	r2, #425
- 243 002e 5343     		muls	r3, r2, r3
- 244 0030 6422     		movs	r2, #100
- 245 0032 93FBF2F3 		sdiv	r3, r3, r2
- 246              	.L51:
- 247 0036 4B70     		strb	r3, [r1, #1]
- 248 0038 0023     		movs	r3, #0
- 249              	.L52:
- 250 003a 8B70     		strb	r3, [r1, #2]
- 251              	.L46:
- 252 003c C5F16403 		rsb	r3, r5, #100
- 253 0040 6425     		movs	r5, #100
- 254 0042 0C78     		ldrb	r4, [r1]	@ zero_extendqisi2
- 255 0044 DBB2     		uxtb	r3, r3
- 256 0046 C4F1FF07 		rsb	r7, r4, #255
- 257 004a 5F43     		muls	r7, r3, r7
- 258 004c 97FBF5F7 		sdiv	r7, r7, r5
- 259 0050 3C44     		add	r4, r4, r7
- 260 0052 E4B2     		uxtb	r4, r4
- 261 0054 4443     		muls	r4, r0, r4
- 262 0056 94FBF5F4 		sdiv	r4, r4, r5
- 263 005a 4A78     		ldrb	r2, [r1, #1]	@ zero_extendqisi2
- 264 005c 0C70     		strb	r4, [r1]
- 265 005e C2F1FF04 		rsb	r4, r2, #255
- 266 0062 5C43     		muls	r4, r3, r4
- 267 0064 94FBF5F4 		sdiv	r4, r4, r5
- 268 0068 2244     		add	r2, r2, r4
- 269 006a D2B2     		uxtb	r2, r2
- 270 006c 4243     		muls	r2, r0, r2
- 271 006e 92FBF5F2 		sdiv	r2, r2, r5
- 272 0072 8E78     		ldrb	r6, [r1, #2]	@ zero_extendqisi2
- 273 0074 4A70     		strb	r2, [r1, #1]
- 274 0076 C6F1FF02 		rsb	r2, r6, #255
- 275 007a 5343     		muls	r3, r2, r3
- 276 007c 93FBF5F3 		sdiv	r3, r3, r5
- 277 0080 1E44     		add	r6, r6, r3
- 278 0082 F6B2     		uxtb	r6, r6
- 279 0084 7043     		muls	r0, r6, r0
- 280 0086 90FBF5F5 		sdiv	r5, r0, r5
- 281 008a 8D70     		strb	r5, [r1, #2]
- 282 008c 03B0     		add	sp, sp, #12
- 283              		@ sp needed
- 284 008e F0BD     		pop	{r4, r5, r6, r7, pc}
- 285              	.L45:
- 286 0090 782B     		cmp	r3, #120
- 287 0092 0AD8     		bhi	.L47
- 288 0094 6FF4D472 		mvn	r2, #424
- 289 0098 3C3B     		subs	r3, r3, #60
- 290 009a 5343     		muls	r3, r2, r3
- 291 009c 6422     		movs	r2, #100
- 292 009e 93FBF2F3 		sdiv	r3, r3, r2
- 293 00a2 013B     		subs	r3, r3, #1
- 294 00a4 0B70     		strb	r3, [r1]
-ARM GAS  /tmp/cckPzBQj.s 			page 6
+ 238 0014 642A     		cmp	r2, #100
+ 239 0016 28BF     		it	cs
+ 240 0018 6422     		movcs	r2, #100
+ 241 001a B342     		cmp	r3, r6
+ 242 001c 28BF     		it	cs
+ 243 001e 3346     		movcs	r3, r6
+ 244 0020 3C2E     		cmp	r6, #60
+ 245 0022 40F2A915 		movw	r5, #425
+ 246 0026 32D8     		bhi	.L44
+ 247 0028 FF20     		movs	r0, #255
+ 248 002a 0870     		strb	r0, [r1]
+ 249 002c 6420     		movs	r0, #100
+ 250 002e 6B43     		muls	r3, r5, r3
+ 251 0030 B3FBF0F3 		udiv	r3, r3, r0
+ 252              	.L51:
+ 253 0034 4B70     		strb	r3, [r1, #1]
+ 254 0036 0023     		movs	r3, #0
+ 255              	.L50:
+ 256 0038 6425     		movs	r5, #100
+ 257 003a 0878     		ldrb	r0, [r1]	@ zero_extendqisi2
+ 258 003c C4F16404 		rsb	r4, r4, #100
+ 259 0040 E4B2     		uxtb	r4, r4
+ 260 0042 C0F1FF07 		rsb	r7, r0, #255
+ 261 0046 6743     		muls	r7, r4, r7
+ 262 0048 B7FBF5F7 		udiv	r7, r7, r5
+ 263 004c 3844     		add	r0, r0, r7
+ 264 004e C0B2     		uxtb	r0, r0
+ 265 0050 5043     		muls	r0, r2, r0
+ 266 0052 B0FBF5F0 		udiv	r0, r0, r5
+ 267 0056 8B70     		strb	r3, [r1, #2]
+ 268 0058 4B78     		ldrb	r3, [r1, #1]	@ zero_extendqisi2
+ 269 005a 0870     		strb	r0, [r1]
+ 270 005c C3F1FF00 		rsb	r0, r3, #255
+ 271 0060 6043     		muls	r0, r4, r0
+ 272 0062 B0FBF5F0 		udiv	r0, r0, r5
+ 273 0066 0344     		add	r3, r3, r0
+ 274 0068 DBB2     		uxtb	r3, r3
+ 275 006a 5343     		muls	r3, r2, r3
+ 276 006c B3FBF5F3 		udiv	r3, r3, r5
+ 277 0070 8E78     		ldrb	r6, [r1, #2]	@ zero_extendqisi2
+ 278 0072 4B70     		strb	r3, [r1, #1]
+ 279 0074 C6F1FF03 		rsb	r3, r6, #255
+ 280 0078 5C43     		muls	r4, r3, r4
+ 281 007a B4FBF5F4 		udiv	r4, r4, r5
+ 282 007e 2644     		add	r6, r6, r4
+ 283 0080 F6B2     		uxtb	r6, r6
+ 284 0082 7243     		muls	r2, r6, r2
+ 285 0084 B2FBF5F5 		udiv	r5, r2, r5
+ 286 0088 8D70     		strb	r5, [r1, #2]
+ 287 008a 03B0     		add	sp, sp, #12
+ 288              		@ sp needed
+ 289 008c F0BD     		pop	{r4, r5, r6, r7, pc}
+ 290              	.L44:
+ 291 008e 782E     		cmp	r6, #120
+ 292 0090 09D8     		bhi	.L46
+ 293 0092 6FF06300 		mvn	r0, #99
+ 294 0096 3C3B     		subs	r3, r3, #60
+ARM GAS  /tmp/ccGbDiCE.s 			page 6
 
 
- 295 00a6 FF23     		movs	r3, #255
- 296 00a8 C5E7     		b	.L51
- 297              	.L47:
- 298 00aa B42B     		cmp	r3, #180
- 299 00ac 4FF00004 		mov	r4, #0
- 300 00b0 0AD8     		bhi	.L48
- 301 00b2 FF22     		movs	r2, #255
- 302 00b4 4A70     		strb	r2, [r1, #1]
- 303 00b6 40F2A912 		movw	r2, #425
- 304 00ba 783B     		subs	r3, r3, #120
- 305 00bc 5343     		muls	r3, r2, r3
- 306 00be 6422     		movs	r2, #100
- 307 00c0 0C70     		strb	r4, [r1]
- 308 00c2 93FBF2F3 		sdiv	r3, r3, r2
- 309 00c6 B8E7     		b	.L52
- 310              	.L48:
- 311 00c8 F02B     		cmp	r3, #240
- 312 00ca 0BD8     		bhi	.L49
- 313 00cc 6FF4D472 		mvn	r2, #424
- 314 00d0 B43B     		subs	r3, r3, #180
- 315 00d2 5343     		muls	r3, r2, r3
- 316 00d4 6422     		movs	r2, #100
- 317 00d6 93FBF2F3 		sdiv	r3, r3, r2
- 318 00da 013B     		subs	r3, r3, #1
- 319 00dc 0C70     		strb	r4, [r1]
- 320 00de 4B70     		strb	r3, [r1, #1]
- 321              	.L53:
- 322 00e0 FF23     		movs	r3, #255
- 323 00e2 AAE7     		b	.L52
- 324              	.L49:
- 325 00e4 B3F5967F 		cmp	r3, #300
- 326 00e8 09D8     		bhi	.L50
- 327 00ea 40F2A912 		movw	r2, #425
- 328 00ee F03B     		subs	r3, r3, #240
- 329 00f0 5343     		muls	r3, r2, r3
- 330 00f2 6422     		movs	r2, #100
- 331 00f4 93FBF2F3 		sdiv	r3, r3, r2
- 332 00f8 4C70     		strb	r4, [r1, #1]
- 333 00fa 0B70     		strb	r3, [r1]
- 334 00fc F0E7     		b	.L53
- 335              	.L50:
- 336 00fe FF22     		movs	r2, #255
- 337 0100 0A70     		strb	r2, [r1]
- 338 0102 6FF4D472 		mvn	r2, #424
- 339 0106 A3F59673 		sub	r3, r3, #300
- 340 010a 5343     		muls	r3, r2, r3
- 341 010c 6422     		movs	r2, #100
- 342 010e 93FBF2F2 		sdiv	r2, r3, r2
- 343 0112 013A     		subs	r2, r2, #1
- 344 0114 4C70     		strb	r4, [r1, #1]
- 345 0116 8A70     		strb	r2, [r1, #2]
- 346 0118 90E7     		b	.L46
- 348              		.section	.text.NP32_SetLED_RGB,"ax",%progbits
- 349              		.align	1
- 350              		.global	NP32_SetLED_RGB
- 351              		.syntax unified
- 352              		.thumb
-ARM GAS  /tmp/cckPzBQj.s 			page 7
+ 295 0098 6B43     		muls	r3, r5, r3
+ 296 009a 93FBF0F3 		sdiv	r3, r3, r0
+ 297 009e 013B     		subs	r3, r3, #1
+ 298 00a0 0B70     		strb	r3, [r1]
+ 299 00a2 FF23     		movs	r3, #255
+ 300 00a4 C6E7     		b	.L51
+ 301              	.L46:
+ 302 00a6 B42E     		cmp	r6, #180
+ 303 00a8 4FF00000 		mov	r0, #0
+ 304 00ac 08D8     		bhi	.L47
+ 305 00ae 0870     		strb	r0, [r1]
+ 306 00b0 FF20     		movs	r0, #255
+ 307 00b2 4870     		strb	r0, [r1, #1]
+ 308 00b4 6420     		movs	r0, #100
+ 309 00b6 783B     		subs	r3, r3, #120
+ 310 00b8 6B43     		muls	r3, r5, r3
+ 311 00ba B3FBF0F3 		udiv	r3, r3, r0
+ 312 00be BBE7     		b	.L50
+ 313              	.L47:
+ 314 00c0 F02E     		cmp	r6, #240
+ 315 00c2 0AD8     		bhi	.L48
+ 316 00c4 0870     		strb	r0, [r1]
+ 317 00c6 6FF06300 		mvn	r0, #99
+ 318 00ca B43B     		subs	r3, r3, #180
+ 319 00cc 6B43     		muls	r3, r5, r3
+ 320 00ce 93FBF0F3 		sdiv	r3, r3, r0
+ 321 00d2 013B     		subs	r3, r3, #1
+ 322 00d4 4B70     		strb	r3, [r1, #1]
+ 323              	.L52:
+ 324 00d6 FF23     		movs	r3, #255
+ 325 00d8 AEE7     		b	.L50
+ 326              	.L48:
+ 327 00da B6F5967F 		cmp	r6, #300
+ 328 00de 07D8     		bhi	.L49
+ 329 00e0 F03B     		subs	r3, r3, #240
+ 330 00e2 6B43     		muls	r3, r5, r3
+ 331 00e4 6425     		movs	r5, #100
+ 332 00e6 B3FBF5F3 		udiv	r3, r3, r5
+ 333 00ea 4870     		strb	r0, [r1, #1]
+ 334 00ec 0B70     		strb	r3, [r1]
+ 335 00ee F2E7     		b	.L52
+ 336              	.L49:
+ 337 00f0 A3F59673 		sub	r3, r3, #300
+ 338 00f4 6B43     		muls	r3, r5, r3
+ 339 00f6 6FF06305 		mvn	r5, #99
+ 340 00fa FF26     		movs	r6, #255
+ 341 00fc 93FBF5F3 		sdiv	r3, r3, r5
+ 342 0100 0E70     		strb	r6, [r1]
+ 343 0102 4870     		strb	r0, [r1, #1]
+ 344 0104 013B     		subs	r3, r3, #1
+ 345 0106 97E7     		b	.L50
+ 347              		.section	.text.NP32_SetLED_RGB,"ax",%progbits
+ 348              		.align	1
+ 349              		.global	NP32_SetLED_RGB
+ 350              		.syntax unified
+ 351              		.thumb
+ 352              		.thumb_func
+ARM GAS  /tmp/ccGbDiCE.s 			page 7
 
 
- 353              		.thumb_func
- 354              		.fpu softvfp
- 356              	NP32_SetLED_RGB:
- 357              		@ args = 0, pretend = 0, frame = 8
- 358              		@ frame_needed = 0, uses_anonymous_args = 0
- 359 0000 13B5     		push	{r0, r1, r4, lr}
- 360 0002 0388     		ldrh	r3, [r0]
- 361 0004 0192     		str	r2, [sp, #4]
- 362 0006 8B42     		cmp	r3, r1
- 363 0008 0CD9     		bls	.L56
- 364 000a 02AB     		add	r3, sp, #8
- 365 000c 33F8044D 		ldrh	r4, [r3, #-4]!	@ unaligned
- 366 0010 4268     		ldr	r2, [r0, #4]
- 367 0012 01EB4101 		add	r1, r1, r1, lsl #1
- 368 0016 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
- 369 0018 5018     		adds	r0, r2, r1
- 370 001a 5452     		strh	r4, [r2, r1]	@ unaligned
- 371 001c 8370     		strb	r3, [r0, #2]
- 372 001e 0020     		movs	r0, #0
- 373              	.L55:
- 374 0020 02B0     		add	sp, sp, #8
- 375              		@ sp needed
- 376 0022 10BD     		pop	{r4, pc}
- 377              	.L56:
- 378 0024 4FF0FF30 		mov	r0, #-1
- 379 0028 FAE7     		b	.L55
- 381              		.section	.text.NP32_SetLED_HSV,"ax",%progbits
- 382              		.align	1
- 383              		.global	NP32_SetLED_HSV
- 384              		.syntax unified
- 385              		.thumb
- 386              		.thumb_func
- 387              		.fpu softvfp
- 389              	NP32_SetLED_HSV:
- 390              		@ args = 0, pretend = 0, frame = 16
- 391              		@ frame_needed = 0, uses_anonymous_args = 0
- 392 0000 30B5     		push	{r4, r5, lr}
- 393 0002 0446     		mov	r4, r0
- 394 0004 0D46     		mov	r5, r1
- 395 0006 85B0     		sub	sp, sp, #20
- 396 0008 03A9     		add	r1, sp, #12
- 397 000a 1046     		mov	r0, r2
- 398 000c 0192     		str	r2, [sp, #4]
- 399 000e FFF7FEFF 		bl	NP32_HSV_To_RGB
- 400 0012 039A     		ldr	r2, [sp, #12]
- 401 0014 2946     		mov	r1, r5
- 402 0016 2046     		mov	r0, r4
- 403 0018 FFF7FEFF 		bl	NP32_SetLED_RGB
- 404 001c 05B0     		add	sp, sp, #20
- 405              		@ sp needed
- 406 001e 30BD     		pop	{r4, r5, pc}
- 408              		.section	.text.NP32_SetAllLEDs_RGB,"ax",%progbits
- 409              		.align	1
- 410              		.global	NP32_SetAllLEDs_RGB
- 411              		.syntax unified
- 412              		.thumb
- 413              		.thumb_func
-ARM GAS  /tmp/cckPzBQj.s 			page 8
+ 353              		.fpu softvfp
+ 355              	NP32_SetLED_RGB:
+ 356              		@ args = 0, pretend = 0, frame = 8
+ 357              		@ frame_needed = 0, uses_anonymous_args = 0
+ 358 0000 13B5     		push	{r0, r1, r4, lr}
+ 359 0002 0388     		ldrh	r3, [r0]
+ 360 0004 0192     		str	r2, [sp, #4]
+ 361 0006 8B42     		cmp	r3, r1
+ 362 0008 0CD9     		bls	.L55
+ 363 000a 4368     		ldr	r3, [r0, #4]
+ 364 000c 01EB4101 		add	r1, r1, r1, lsl #1
+ 365 0010 9DF80600 		ldrb	r0, [sp, #6]	@ zero_extendqisi2
+ 366 0014 BDF80440 		ldrh	r4, [sp, #4]	@ unaligned
+ 367 0018 5A18     		adds	r2, r3, r1
+ 368 001a 5C52     		strh	r4, [r3, r1]	@ unaligned
+ 369 001c 9070     		strb	r0, [r2, #2]
+ 370 001e 0020     		movs	r0, #0
+ 371              	.L54:
+ 372 0020 02B0     		add	sp, sp, #8
+ 373              		@ sp needed
+ 374 0022 10BD     		pop	{r4, pc}
+ 375              	.L55:
+ 376 0024 4FF0FF30 		mov	r0, #-1
+ 377 0028 FAE7     		b	.L54
+ 379              		.section	.text.NP32_SetLED_HSV,"ax",%progbits
+ 380              		.align	1
+ 381              		.global	NP32_SetLED_HSV
+ 382              		.syntax unified
+ 383              		.thumb
+ 384              		.thumb_func
+ 385              		.fpu softvfp
+ 387              	NP32_SetLED_HSV:
+ 388              		@ args = 0, pretend = 0, frame = 16
+ 389              		@ frame_needed = 0, uses_anonymous_args = 0
+ 390 0000 30B5     		push	{r4, r5, lr}
+ 391 0002 0446     		mov	r4, r0
+ 392 0004 0D46     		mov	r5, r1
+ 393 0006 85B0     		sub	sp, sp, #20
+ 394 0008 1046     		mov	r0, r2
+ 395 000a 03A9     		add	r1, sp, #12
+ 396 000c 0192     		str	r2, [sp, #4]
+ 397 000e FFF7FEFF 		bl	NP32_HSV_To_RGB
+ 398 0012 2946     		mov	r1, r5
+ 399 0014 2046     		mov	r0, r4
+ 400 0016 039A     		ldr	r2, [sp, #12]
+ 401 0018 FFF7FEFF 		bl	NP32_SetLED_RGB
+ 402 001c 05B0     		add	sp, sp, #20
+ 403              		@ sp needed
+ 404 001e 30BD     		pop	{r4, r5, pc}
+ 406              		.section	.text.NP32_SetAllLEDs_RGB,"ax",%progbits
+ 407              		.align	1
+ 408              		.global	NP32_SetAllLEDs_RGB
+ 409              		.syntax unified
+ 410              		.thumb
+ 411              		.thumb_func
+ 412              		.fpu softvfp
+ 414              	NP32_SetAllLEDs_RGB:
+ARM GAS  /tmp/ccGbDiCE.s 			page 8
 
 
- 414              		.fpu softvfp
- 416              	NP32_SetAllLEDs_RGB:
- 417              		@ args = 0, pretend = 0, frame = 8
- 418              		@ frame_needed = 0, uses_anonymous_args = 0
- 419 0000 0023     		movs	r3, #0
- 420 0002 F7B5     		push	{r0, r1, r2, r4, r5, r6, r7, lr}
- 421 0004 02AA     		add	r2, sp, #8
- 422 0006 42F8041D 		str	r1, [r2, #-4]!
- 423              	.L59:
- 424 000a 0488     		ldrh	r4, [r0]
- 425 000c 99B2     		uxth	r1, r3
- 426 000e 8C42     		cmp	r4, r1
- 427 0010 03F10105 		add	r5, r3, #1
- 428 0014 02D8     		bhi	.L60
- 429 0016 0020     		movs	r0, #0
- 430 0018 03B0     		add	sp, sp, #12
- 431              		@ sp needed
- 432 001a F0BD     		pop	{r4, r5, r6, r7, pc}
- 433              	.L60:
- 434 001c 4168     		ldr	r1, [r0, #4]
- 435 001e 9BB2     		uxth	r3, r3
- 436 0020 03EB4303 		add	r3, r3, r3, lsl #1
- 437 0024 1788     		ldrh	r7, [r2]	@ unaligned
- 438 0026 9678     		ldrb	r6, [r2, #2]	@ zero_extendqisi2
- 439 0028 CC18     		adds	r4, r1, r3
- 440 002a CF52     		strh	r7, [r1, r3]	@ unaligned
- 441 002c A670     		strb	r6, [r4, #2]
- 442 002e 2B46     		mov	r3, r5
- 443 0030 EBE7     		b	.L59
- 445              		.section	.text.NP32_SetAllLEDs_HSV,"ax",%progbits
- 446              		.align	1
- 447              		.global	NP32_SetAllLEDs_HSV
- 448              		.syntax unified
- 449              		.thumb
- 450              		.thumb_func
- 451              		.fpu softvfp
- 453              	NP32_SetAllLEDs_HSV:
- 454              		@ args = 0, pretend = 0, frame = 16
- 455              		@ frame_needed = 0, uses_anonymous_args = 0
- 456 0000 1FB5     		push	{r0, r1, r2, r3, r4, lr}
- 457 0002 0446     		mov	r4, r0
- 458 0004 0191     		str	r1, [sp, #4]
- 459 0006 0846     		mov	r0, r1
- 460 0008 03A9     		add	r1, sp, #12
- 461 000a FFF7FEFF 		bl	NP32_HSV_To_RGB
- 462 000e 0399     		ldr	r1, [sp, #12]
- 463 0010 2046     		mov	r0, r4
- 464 0012 FFF7FEFF 		bl	NP32_SetAllLEDs_RGB
- 465 0016 04B0     		add	sp, sp, #16
- 466              		@ sp needed
- 467 0018 10BD     		pop	{r4, pc}
- 469              		.section	.text.NP32_SetLEDSpan_RGB,"ax",%progbits
- 470              		.align	1
- 471              		.global	NP32_SetLEDSpan_RGB
- 472              		.syntax unified
- 473              		.thumb
- 474              		.thumb_func
-ARM GAS  /tmp/cckPzBQj.s 			page 9
+ 415              		@ args = 0, pretend = 0, frame = 8
+ 416              		@ frame_needed = 0, uses_anonymous_args = 0
+ 417 0000 0022     		movs	r2, #0
+ 418 0002 73B5     		push	{r0, r1, r4, r5, r6, lr}
+ 419 0004 0191     		str	r1, [sp, #4]
+ 420              	.L58:
+ 421 0006 0188     		ldrh	r1, [r0]
+ 422 0008 93B2     		uxth	r3, r2
+ 423 000a 9942     		cmp	r1, r3
+ 424 000c 02D8     		bhi	.L59
+ 425 000e 0020     		movs	r0, #0
+ 426 0010 02B0     		add	sp, sp, #8
+ 427              		@ sp needed
+ 428 0012 70BD     		pop	{r4, r5, r6, pc}
+ 429              	.L59:
+ 430 0014 4168     		ldr	r1, [r0, #4]
+ 431 0016 93B2     		uxth	r3, r2
+ 432 0018 03EB4303 		add	r3, r3, r3, lsl #1
+ 433 001c BDF80460 		ldrh	r6, [sp, #4]	@ unaligned
+ 434 0020 9DF80650 		ldrb	r5, [sp, #6]	@ zero_extendqisi2
+ 435 0024 CC18     		adds	r4, r1, r3
+ 436 0026 CE52     		strh	r6, [r1, r3]	@ unaligned
+ 437 0028 0132     		adds	r2, r2, #1
+ 438 002a A570     		strb	r5, [r4, #2]
+ 439 002c EBE7     		b	.L58
+ 441              		.section	.text.NP32_SetAllLEDs_HSV,"ax",%progbits
+ 442              		.align	1
+ 443              		.global	NP32_SetAllLEDs_HSV
+ 444              		.syntax unified
+ 445              		.thumb
+ 446              		.thumb_func
+ 447              		.fpu softvfp
+ 449              	NP32_SetAllLEDs_HSV:
+ 450              		@ args = 0, pretend = 0, frame = 16
+ 451              		@ frame_needed = 0, uses_anonymous_args = 0
+ 452 0000 1FB5     		push	{r0, r1, r2, r3, r4, lr}
+ 453 0002 0446     		mov	r4, r0
+ 454 0004 0191     		str	r1, [sp, #4]
+ 455 0006 0846     		mov	r0, r1
+ 456 0008 03A9     		add	r1, sp, #12
+ 457 000a FFF7FEFF 		bl	NP32_HSV_To_RGB
+ 458 000e 2046     		mov	r0, r4
+ 459 0010 0399     		ldr	r1, [sp, #12]
+ 460 0012 FFF7FEFF 		bl	NP32_SetAllLEDs_RGB
+ 461 0016 04B0     		add	sp, sp, #16
+ 462              		@ sp needed
+ 463 0018 10BD     		pop	{r4, pc}
+ 465              		.section	.text.NP32_SetLEDSpan_RGB,"ax",%progbits
+ 466              		.align	1
+ 467              		.global	NP32_SetLEDSpan_RGB
+ 468              		.syntax unified
+ 469              		.thumb
+ 470              		.thumb_func
+ 471              		.fpu softvfp
+ 473              	NP32_SetLEDSpan_RGB:
+ 474              		@ args = 0, pretend = 0, frame = 8
+ 475              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /tmp/ccGbDiCE.s 			page 9
 
 
- 475              		.fpu softvfp
- 477              	NP32_SetLEDSpan_RGB:
- 478              		@ args = 0, pretend = 0, frame = 8
- 479              		@ frame_needed = 0, uses_anonymous_args = 0
- 480 0000 73B5     		push	{r0, r1, r4, r5, r6, lr}
- 481 0002 0193     		str	r3, [sp, #4]
- 482 0004 0388     		ldrh	r3, [r0]
- 483 0006 8B42     		cmp	r3, r1
- 484 0008 19D9     		bls	.L67
- 485 000a 9342     		cmp	r3, r2
- 486 000c 17D9     		bls	.L67
- 487 000e 9142     		cmp	r1, r2
- 488 0010 15D8     		bhi	.L67
- 489 0012 521A     		subs	r2, r2, r1
- 490 0014 4B1C     		adds	r3, r1, #1
- 491 0016 92B2     		uxth	r2, r2
- 492 0018 1A44     		add	r2, r2, r3
- 493 001a 01EB4104 		add	r4, r1, r1, lsl #1
- 494 001e 02EB4202 		add	r2, r2, r2, lsl #1
- 495              	.L64:
- 496 0022 4368     		ldr	r3, [r0, #4]
- 497 0024 BDF80460 		ldrh	r6, [sp, #4]	@ unaligned
- 498 0028 1919     		adds	r1, r3, r4
- 499 002a 1E53     		strh	r6, [r3, r4]	@ unaligned
- 500 002c 9DF80650 		ldrb	r5, [sp, #6]	@ zero_extendqisi2
- 501 0030 0334     		adds	r4, r4, #3
- 502 0032 9442     		cmp	r4, r2
- 503 0034 8D70     		strb	r5, [r1, #2]
- 504 0036 F4D1     		bne	.L64
- 505 0038 0020     		movs	r0, #0
- 506              	.L63:
- 507 003a 02B0     		add	sp, sp, #8
- 508              		@ sp needed
- 509 003c 70BD     		pop	{r4, r5, r6, pc}
- 510              	.L67:
- 511 003e 4FF0FF30 		mov	r0, #-1
- 512 0042 FAE7     		b	.L63
- 514              		.section	.text.NP32_SetLEDSpan_HSV,"ax",%progbits
- 515              		.align	1
- 516              		.global	NP32_SetLEDSpan_HSV
- 517              		.syntax unified
- 518              		.thumb
- 519              		.thumb_func
- 520              		.fpu softvfp
- 522              	NP32_SetLEDSpan_HSV:
- 523              		@ args = 0, pretend = 0, frame = 16
- 524              		@ frame_needed = 0, uses_anonymous_args = 0
- 525 0000 7FB5     		push	{r0, r1, r2, r3, r4, r5, r6, lr}
- 526 0002 0446     		mov	r4, r0
- 527 0004 0D46     		mov	r5, r1
- 528 0006 1646     		mov	r6, r2
- 529 0008 03A9     		add	r1, sp, #12
- 530 000a 1846     		mov	r0, r3
- 531 000c 0193     		str	r3, [sp, #4]
- 532 000e FFF7FEFF 		bl	NP32_HSV_To_RGB
- 533 0012 039B     		ldr	r3, [sp, #12]
- 534 0014 3246     		mov	r2, r6
-ARM GAS  /tmp/cckPzBQj.s 			page 10
+ 476 0000 F7B5     		push	{r0, r1, r2, r4, r5, r6, r7, lr}
+ 477 0002 0193     		str	r3, [sp, #4]
+ 478 0004 0388     		ldrh	r3, [r0]
+ 479 0006 8B42     		cmp	r3, r1
+ 480 0008 16D9     		bls	.L66
+ 481 000a 9342     		cmp	r3, r2
+ 482 000c 14D9     		bls	.L66
+ 483 000e 9142     		cmp	r1, r2
+ 484 0010 12D8     		bhi	.L66
+ 485 0012 01EB4103 		add	r3, r1, r1, lsl #1
+ 486              	.L63:
+ 487 0016 4468     		ldr	r4, [r0, #4]
+ 488 0018 0131     		adds	r1, r1, #1
+ 489 001a BDF80470 		ldrh	r7, [sp, #4]	@ unaligned
+ 490 001e 9DF80660 		ldrb	r6, [sp, #6]	@ zero_extendqisi2
+ 491 0022 89B2     		uxth	r1, r1
+ 492 0024 E518     		adds	r5, r4, r3
+ 493 0026 8A42     		cmp	r2, r1
+ 494 0028 E752     		strh	r7, [r4, r3]	@ unaligned
+ 495 002a AE70     		strb	r6, [r5, #2]
+ 496 002c 03F10303 		add	r3, r3, #3
+ 497 0030 F1D2     		bcs	.L63
+ 498 0032 0020     		movs	r0, #0
+ 499              	.L62:
+ 500 0034 03B0     		add	sp, sp, #12
+ 501              		@ sp needed
+ 502 0036 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 503              	.L66:
+ 504 0038 4FF0FF30 		mov	r0, #-1
+ 505 003c FAE7     		b	.L62
+ 507              		.section	.text.NP32_SetLEDSpan_HSV,"ax",%progbits
+ 508              		.align	1
+ 509              		.global	NP32_SetLEDSpan_HSV
+ 510              		.syntax unified
+ 511              		.thumb
+ 512              		.thumb_func
+ 513              		.fpu softvfp
+ 515              	NP32_SetLEDSpan_HSV:
+ 516              		@ args = 0, pretend = 0, frame = 16
+ 517              		@ frame_needed = 0, uses_anonymous_args = 0
+ 518 0000 7FB5     		push	{r0, r1, r2, r3, r4, r5, r6, lr}
+ 519 0002 0446     		mov	r4, r0
+ 520 0004 0D46     		mov	r5, r1
+ 521 0006 1646     		mov	r6, r2
+ 522 0008 1846     		mov	r0, r3
+ 523 000a 03A9     		add	r1, sp, #12
+ 524 000c 0193     		str	r3, [sp, #4]
+ 525 000e FFF7FEFF 		bl	NP32_HSV_To_RGB
+ 526 0012 3246     		mov	r2, r6
+ 527 0014 2946     		mov	r1, r5
+ 528 0016 2046     		mov	r0, r4
+ 529 0018 039B     		ldr	r3, [sp, #12]
+ 530 001a FFF7FEFF 		bl	NP32_SetLEDSpan_RGB
+ 531 001e 04B0     		add	sp, sp, #16
+ 532              		@ sp needed
+ 533 0020 70BD     		pop	{r4, r5, r6, pc}
+ 535              		.section	.text.NP32_ClearAllLEDs,"ax",%progbits
+ARM GAS  /tmp/ccGbDiCE.s 			page 10
 
 
- 535 0016 2946     		mov	r1, r5
- 536 0018 2046     		mov	r0, r4
- 537 001a FFF7FEFF 		bl	NP32_SetLEDSpan_RGB
- 538 001e 04B0     		add	sp, sp, #16
- 539              		@ sp needed
- 540 0020 70BD     		pop	{r4, r5, r6, pc}
- 542              		.section	.text.NP32_ClearAllLEDs,"ax",%progbits
- 543              		.align	1
- 544              		.global	NP32_ClearAllLEDs
- 545              		.syntax unified
- 546              		.thumb
- 547              		.thumb_func
- 548              		.fpu softvfp
- 550              	NP32_ClearAllLEDs:
- 551              		@ args = 0, pretend = 0, frame = 8
- 552              		@ frame_needed = 0, uses_anonymous_args = 0
- 553 0000 0023     		movs	r3, #0
- 554 0002 07B5     		push	{r0, r1, r2, lr}
- 555 0004 8DF80430 		strb	r3, [sp, #4]
- 556 0008 8DF80530 		strb	r3, [sp, #5]
- 557 000c 8DF80630 		strb	r3, [sp, #6]
- 558 0010 0199     		ldr	r1, [sp, #4]
- 559 0012 FFF7FEFF 		bl	NP32_SetAllLEDs_RGB
- 560 0016 03B0     		add	sp, sp, #12
- 561              		@ sp needed
- 562 0018 5DF804FB 		ldr	pc, [sp], #4
- 564              		.section	.text.NP32_ShiftLeft,"ax",%progbits
- 565              		.align	1
- 566              		.global	NP32_ShiftLeft
- 567              		.syntax unified
- 568              		.thumb
- 569              		.thumb_func
- 570              		.fpu softvfp
- 572              	NP32_ShiftLeft:
- 573              		@ args = 0, pretend = 0, frame = 0
- 574              		@ frame_needed = 0, uses_anonymous_args = 0
- 575 0000 F0B5     		push	{r4, r5, r6, r7, lr}
- 576 0002 0024     		movs	r4, #0
- 577 0004 2646     		mov	r6, r4
- 578              	.L72:
- 579 0006 0288     		ldrh	r2, [r0]
- 580 0008 A3B2     		uxth	r3, r4
- 581 000a 9342     		cmp	r3, r2
- 582 000c 01D3     		bcc	.L75
- 583 000e 0020     		movs	r0, #0
- 584 0010 F0BD     		pop	{r4, r5, r6, r7, pc}
- 585              	.L75:
- 586 0012 0B44     		add	r3, r3, r1
- 587 0014 9BB2     		uxth	r3, r3
- 588 0016 9A42     		cmp	r2, r3
- 589 0018 A2B2     		uxth	r2, r4
- 590 001a 4568     		ldr	r5, [r0, #4]
- 591 001c 02EB4202 		add	r2, r2, r2, lsl #1
- 592 0020 05D8     		bhi	.L73
- 593 0022 AB18     		adds	r3, r5, r2
- 594 0024 AE54     		strb	r6, [r5, r2]
- 595 0026 5E70     		strb	r6, [r3, #1]
-ARM GAS  /tmp/cckPzBQj.s 			page 11
+ 536              		.align	1
+ 537              		.global	NP32_ClearAllLEDs
+ 538              		.syntax unified
+ 539              		.thumb
+ 540              		.thumb_func
+ 541              		.fpu softvfp
+ 543              	NP32_ClearAllLEDs:
+ 544              		@ args = 0, pretend = 0, frame = 8
+ 545              		@ frame_needed = 0, uses_anonymous_args = 0
+ 546              		@ link register save eliminated.
+ 547 0000 0023     		movs	r3, #0
+ 548 0002 82B0     		sub	sp, sp, #8
+ 549 0004 ADF80430 		strh	r3, [sp, #4]	@ movhi
+ 550 0008 8DF80630 		strb	r3, [sp, #6]
+ 551 000c 0199     		ldr	r1, [sp, #4]
+ 552 000e 02B0     		add	sp, sp, #8
+ 553              		@ sp needed
+ 554 0010 FFF7FEBF 		b	NP32_SetAllLEDs_RGB
+ 556              		.section	.text.NP32_ShiftLeft,"ax",%progbits
+ 557              		.align	1
+ 558              		.global	NP32_ShiftLeft
+ 559              		.syntax unified
+ 560              		.thumb
+ 561              		.thumb_func
+ 562              		.fpu softvfp
+ 564              	NP32_ShiftLeft:
+ 565              		@ args = 0, pretend = 0, frame = 0
+ 566              		@ frame_needed = 0, uses_anonymous_args = 0
+ 567 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 568 0002 0024     		movs	r4, #0
+ 569 0004 2646     		mov	r6, r4
+ 570              	.L71:
+ 571 0006 B0F800C0 		ldrh	ip, [r0]
+ 572 000a A3B2     		uxth	r3, r4
+ 573 000c 6345     		cmp	r3, ip
+ 574 000e 01D3     		bcc	.L74
+ 575 0010 0020     		movs	r0, #0
+ 576 0012 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 577              	.L74:
+ 578 0014 0B44     		add	r3, r3, r1
+ 579 0016 4568     		ldr	r5, [r0, #4]
+ 580 0018 9BB2     		uxth	r3, r3
+ 581 001a A2B2     		uxth	r2, r4
+ 582 001c 02EB4202 		add	r2, r2, r2, lsl #1
+ 583 0020 6345     		cmp	r3, ip
+ 584 0022 05EB0207 		add	r7, r5, r2
+ 585 0026 04D3     		bcc	.L72
+ 586 0028 AE54     		strb	r6, [r5, r2]
+ 587 002a 7E70     		strb	r6, [r7, #1]
+ 588 002c BE70     		strb	r6, [r7, #2]
+ 589              	.L73:
+ 590 002e 0134     		adds	r4, r4, #1
+ 591 0030 E9E7     		b	.L71
+ 592              	.L72:
+ 593 0032 03EB4303 		add	r3, r3, r3, lsl #1
+ 594 0036 05EB030C 		add	ip, r5, r3
+ 595 003a EB5A     		ldrh	r3, [r5, r3]	@ unaligned
+ARM GAS  /tmp/ccGbDiCE.s 			page 11
 
 
- 596 0028 9E70     		strb	r6, [r3, #2]
- 597              	.L74:
- 598 002a 0134     		adds	r4, r4, #1
- 599 002c EBE7     		b	.L72
- 600              	.L73:
- 601 002e 03EB4303 		add	r3, r3, r3, lsl #1
- 602 0032 2B44     		add	r3, r3, r5
- 603 0034 B3F800E0 		ldrh	lr, [r3]	@ unaligned
- 604 0038 AF18     		adds	r7, r5, r2
- 605 003a 25F802E0 		strh	lr, [r5, r2]	@ unaligned
- 606 003e 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
- 607 0040 BB70     		strb	r3, [r7, #2]
- 608 0042 F2E7     		b	.L74
- 610              		.section	.text.NP32_ShiftRight,"ax",%progbits
- 611              		.align	1
- 612              		.global	NP32_ShiftRight
- 613              		.syntax unified
- 614              		.thumb
- 615              		.thumb_func
- 616              		.fpu softvfp
- 618              	NP32_ShiftRight:
- 619              		@ args = 0, pretend = 0, frame = 0
- 620              		@ frame_needed = 0, uses_anonymous_args = 0
- 621 0000 F0B5     		push	{r4, r5, r6, r7, lr}
- 622 0002 0026     		movs	r6, #0
- 623 0004 0388     		ldrh	r3, [r0]
- 624 0006 013B     		subs	r3, r3, #1
- 625 0008 9BB2     		uxth	r3, r3
- 626              	.L79:
- 627 000a 5A00     		lsls	r2, r3, #1
- 628 000c 8B42     		cmp	r3, r1
- 629 000e 4568     		ldr	r5, [r0, #4]
- 630 0010 1A44     		add	r2, r2, r3
- 631 0012 06D2     		bcs	.L77
- 632 0014 AC18     		adds	r4, r5, r2
- 633 0016 AE54     		strb	r6, [r5, r2]
- 634 0018 6670     		strb	r6, [r4, #1]
- 635 001a A670     		strb	r6, [r4, #2]
- 636              	.L78:
- 637 001c 013B     		subs	r3, r3, #1
- 638 001e 9BB2     		uxth	r3, r3
- 639 0020 F3E7     		b	.L79
- 640              	.L77:
- 641 0022 5C1A     		subs	r4, r3, r1
- 642 0024 04EB4404 		add	r4, r4, r4, lsl #1
- 643 0028 2C44     		add	r4, r4, r5
- 644 002a B4F800E0 		ldrh	lr, [r4]	@ unaligned
- 645 002e AF18     		adds	r7, r5, r2
- 646 0030 25F802E0 		strh	lr, [r5, r2]	@ unaligned
- 647 0034 A278     		ldrb	r2, [r4, #2]	@ zero_extendqisi2
- 648 0036 BA70     		strb	r2, [r7, #2]
- 649 0038 F0E7     		b	.L78
- 651              		.section	.text.NP32_RotateLeft,"ax",%progbits
- 652              		.align	1
- 653              		.global	NP32_RotateLeft
- 654              		.syntax unified
- 655              		.thumb
-ARM GAS  /tmp/cckPzBQj.s 			page 12
+ 596 003c AB52     		strh	r3, [r5, r2]	@ unaligned
+ 597 003e 9CF80230 		ldrb	r3, [ip, #2]	@ zero_extendqisi2
+ 598 0042 BB70     		strb	r3, [r7, #2]
+ 599 0044 F3E7     		b	.L73
+ 601              		.section	.text.NP32_ShiftRight,"ax",%progbits
+ 602              		.align	1
+ 603              		.global	NP32_ShiftRight
+ 604              		.syntax unified
+ 605              		.thumb
+ 606              		.thumb_func
+ 607              		.fpu softvfp
+ 609              	NP32_ShiftRight:
+ 610              		@ args = 0, pretend = 0, frame = 0
+ 611              		@ frame_needed = 0, uses_anonymous_args = 0
+ 612 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 613 0002 0025     		movs	r5, #0
+ 614 0004 0388     		ldrh	r3, [r0]
+ 615 0006 013B     		subs	r3, r3, #1
+ 616 0008 9BB2     		uxth	r3, r3
+ 617              	.L78:
+ 618 000a 4268     		ldr	r2, [r0, #4]
+ 619 000c 03EB4307 		add	r7, r3, r3, lsl #1
+ 620 0010 8B42     		cmp	r3, r1
+ 621 0012 02EB0706 		add	r6, r2, r7
+ 622 0016 05D2     		bcs	.L76
+ 623 0018 D555     		strb	r5, [r2, r7]
+ 624 001a 7570     		strb	r5, [r6, #1]
+ 625 001c B570     		strb	r5, [r6, #2]
+ 626              	.L77:
+ 627 001e 013B     		subs	r3, r3, #1
+ 628 0020 9BB2     		uxth	r3, r3
+ 629 0022 F2E7     		b	.L78
+ 630              	.L76:
+ 631 0024 5C1A     		subs	r4, r3, r1
+ 632 0026 04EB4404 		add	r4, r4, r4, lsl #1
+ 633 002a 02EB040C 		add	ip, r2, r4
+ 634 002e 145B     		ldrh	r4, [r2, r4]	@ unaligned
+ 635 0030 D453     		strh	r4, [r2, r7]	@ unaligned
+ 636 0032 9CF80220 		ldrb	r2, [ip, #2]	@ zero_extendqisi2
+ 637 0036 B270     		strb	r2, [r6, #2]
+ 638 0038 F1E7     		b	.L77
+ 640              		.section	.text.NP32_RotateLeft,"ax",%progbits
+ 641              		.align	1
+ 642              		.global	NP32_RotateLeft
+ 643              		.syntax unified
+ 644              		.thumb
+ 645              		.thumb_func
+ 646              		.fpu softvfp
+ 648              	NP32_RotateLeft:
+ 649              		@ args = 0, pretend = 0, frame = 0
+ 650              		@ frame_needed = 0, uses_anonymous_args = 0
+ 651 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 652 0004 0D46     		mov	r5, r1
+ 653 0006 0646     		mov	r6, r0
+ 654 0008 0321     		movs	r1, #3
+ 655 000a 2846     		mov	r0, r5
+ 656 000c FFF7FEFF 		bl	calloc
+ARM GAS  /tmp/ccGbDiCE.s 			page 12
 
 
- 656              		.thumb_func
- 657              		.fpu softvfp
- 659              	NP32_RotateLeft:
- 660              		@ args = 0, pretend = 0, frame = 0
- 661              		@ frame_needed = 0, uses_anonymous_args = 0
- 662 0000 2DE9F843 		push	{r3, r4, r5, r6, r7, r8, r9, lr}
- 663 0004 0C46     		mov	r4, r1
- 664 0006 0546     		mov	r5, r0
- 665 0008 0321     		movs	r1, #3
- 666 000a 2046     		mov	r0, r4
- 667 000c FFF7FEFF 		bl	calloc
- 668 0010 90B3     		cbz	r0, .L87
- 669 0012 0026     		movs	r6, #0
- 670              	.L82:
- 671 0014 2A88     		ldrh	r2, [r5]
- 672 0016 B3B2     		uxth	r3, r6
- 673 0018 9342     		cmp	r3, r2
- 674 001a 04D3     		bcc	.L86
- 675 001c FFF7FEFF 		bl	free
- 676 0020 0020     		movs	r0, #0
- 677 0022 BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
- 678              	.L86:
- 679 0026 1F19     		adds	r7, r3, r4
- 680 0028 A342     		cmp	r3, r4
- 681 002a BFB2     		uxth	r7, r7
- 682 002c B3B2     		uxth	r3, r6
- 683 002e 6968     		ldr	r1, [r5, #4]
- 684 0030 0DD2     		bcs	.L83
- 685 0032 03EB430E 		add	lr, r3, r3, lsl #1
- 686 0036 01EB0E0C 		add	ip, r1, lr
- 687 003a BCF80090 		ldrh	r9, [ip]	@ unaligned
- 688 003e 00EB0E08 		add	r8, r0, lr
- 689 0042 20F80E90 		strh	r9, [r0, lr]	@ unaligned
- 690 0046 9CF802E0 		ldrb	lr, [ip, #2]	@ zero_extendqisi2
- 691 004a 88F802E0 		strb	lr, [r8, #2]
- 692              	.L83:
- 693 004e BA42     		cmp	r2, r7
- 694 0050 9BBF     		ittet	ls
- 695 0052 BA1A     		subls	r2, r7, r2
- 696 0054 02EB4202 		addls	r2, r2, r2, lsl #1
- 697 0058 07EB4702 		addhi	r2, r7, r7, lsl #1
- 698 005c 1218     		addls	r2, r2, r0
- 699 005e 88BF     		it	hi
- 700 0060 5218     		addhi	r2, r2, r1
- 701 0062 1788     		ldrh	r7, [r2]	@ unaligned
- 702 0064 03EB4303 		add	r3, r3, r3, lsl #1
- 703 0068 CF52     		strh	r7, [r1, r3]	@ unaligned
- 704 006a 01EB030E 		add	lr, r1, r3
- 705 006e 9378     		ldrb	r3, [r2, #2]	@ zero_extendqisi2
- 706 0070 0136     		adds	r6, r6, #1
- 707 0072 8EF80230 		strb	r3, [lr, #2]
- 708 0076 CDE7     		b	.L82
- 709              	.L87:
- 710 0078 4FF0FF30 		mov	r0, #-1
- 711 007c BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
- 713              		.section	.text.NP32_RotateRight,"ax",%progbits
- 714              		.align	1
-ARM GAS  /tmp/cckPzBQj.s 			page 13
+ 657 0010 88B3     		cbz	r0, .L86
+ 658 0012 0027     		movs	r7, #0
+ 659              	.L81:
+ 660 0014 3388     		ldrh	r3, [r6]
+ 661 0016 1FFA87FE 		uxth	lr, r7
+ 662 001a 9E45     		cmp	lr, r3
+ 663 001c 04D3     		bcc	.L85
+ 664 001e FFF7FEFF 		bl	free
+ 665 0022 0020     		movs	r0, #0
+ 666              	.L80:
+ 667 0024 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 668              	.L85:
+ 669 0028 7168     		ldr	r1, [r6, #4]
+ 670 002a BCB2     		uxth	r4, r7
+ 671 002c 0EEB0502 		add	r2, lr, r5
+ 672 0030 04EB4404 		add	r4, r4, r4, lsl #1
+ 673 0034 AE45     		cmp	lr, r5
+ 674 0036 92B2     		uxth	r2, r2
+ 675 0038 01EB040C 		add	ip, r1, r4
+ 676 003c 09D2     		bcs	.L82
+ 677 003e BCF80080 		ldrh	r8, [ip]	@ unaligned
+ 678 0042 00EB040E 		add	lr, r0, r4
+ 679 0046 20F80480 		strh	r8, [r0, r4]	@ unaligned
+ 680 004a 9CF80280 		ldrb	r8, [ip, #2]	@ zero_extendqisi2
+ 681 004e 8EF80280 		strb	r8, [lr, #2]
+ 682              	.L82:
+ 683 0052 9A42     		cmp	r2, r3
+ 684 0054 25BF     		ittet	cs
+ 685 0056 D31A     		subcs	r3, r2, r3
+ 686 0058 03EB4303 		addcs	r3, r3, r3, lsl #1
+ 687 005c 02EB4203 		addcc	r3, r2, r2, lsl #1
+ 688 0060 C218     		addcs	r2, r0, r3
+ 689 0062 36BF     		itet	cc
+ 690 0064 CA18     		addcc	r2, r1, r3
+ 691 0066 C35A     		ldrhcs	r3, [r0, r3]	@ unaligned
+ 692 0068 CB5A     		ldrhcc	r3, [r1, r3]	@ unaligned
+ 693 006a 0137     		adds	r7, r7, #1
+ 694 006c 0B53     		strh	r3, [r1, r4]	@ unaligned
+ 695 006e 9378     		ldrb	r3, [r2, #2]	@ zero_extendqisi2
+ 696 0070 8CF80230 		strb	r3, [ip, #2]
+ 697 0074 CEE7     		b	.L81
+ 698              	.L86:
+ 699 0076 4FF0FF30 		mov	r0, #-1
+ 700 007a D3E7     		b	.L80
+ 702              		.section	.text.NP32_RotateRight,"ax",%progbits
+ 703              		.align	1
+ 704              		.global	NP32_RotateRight
+ 705              		.syntax unified
+ 706              		.thumb
+ 707              		.thumb_func
+ 708              		.fpu softvfp
+ 710              	NP32_RotateRight:
+ 711              		@ args = 0, pretend = 0, frame = 0
+ 712              		@ frame_needed = 0, uses_anonymous_args = 0
+ 713 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 714 0004 0C46     		mov	r4, r1
+ 715 0006 0746     		mov	r7, r0
+ARM GAS  /tmp/ccGbDiCE.s 			page 13
 
 
- 715              		.global	NP32_RotateRight
- 716              		.syntax unified
- 717              		.thumb
- 718              		.thumb_func
- 719              		.fpu softvfp
- 721              	NP32_RotateRight:
- 722              		@ args = 0, pretend = 0, frame = 0
- 723              		@ frame_needed = 0, uses_anonymous_args = 0
- 724 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
- 725 0004 0D46     		mov	r5, r1
- 726 0006 0646     		mov	r6, r0
- 727 0008 0321     		movs	r1, #3
- 728 000a 2846     		mov	r0, r5
- 729 000c FFF7FEFF 		bl	calloc
- 730 0010 68B3     		cbz	r0, .L95
- 731 0012 3788     		ldrh	r7, [r6]
- 732 0014 7B1E     		subs	r3, r7, #1
- 733 0016 9BB2     		uxth	r3, r3
- 734 0018 7F1B     		subs	r7, r7, r5
- 735              	.L94:
- 736 001a BB42     		cmp	r3, r7
- 737 001c 7468     		ldr	r4, [r6, #4]
- 738 001e 4FEA4302 		lsl	r2, r3, #1
- 739 0022 0FDB     		blt	.L91
- 740 0024 02EB030E 		add	lr, r2, r3
- 741 0028 A644     		add	lr, lr, r4
- 742 002a D91B     		subs	r1, r3, r7
- 743 002c BEF80080 		ldrh	r8, [lr]	@ unaligned
- 744 0030 01EB4101 		add	r1, r1, r1, lsl #1
- 745 0034 00EB010C 		add	ip, r0, r1
- 746 0038 20F80180 		strh	r8, [r0, r1]	@ unaligned
- 747 003c 9EF80210 		ldrb	r1, [lr, #2]	@ zero_extendqisi2
- 748 0040 8CF80210 		strb	r1, [ip, #2]
+ 716 0008 0321     		movs	r1, #3
+ 717 000a 2046     		mov	r0, r4
+ 718 000c FFF7FEFF 		bl	calloc
+ 719 0010 70B3     		cbz	r0, .L94
+ 720 0012 3A88     		ldrh	r2, [r7]
+ 721 0014 531E     		subs	r3, r2, #1
+ 722 0016 9BB2     		uxth	r3, r3
+ 723 0018 121B     		subs	r2, r2, r4
+ 724              	.L93:
+ 725 001a 7D68     		ldr	r5, [r7, #4]
+ 726 001c 03EB4301 		add	r1, r3, r3, lsl #1
+ 727 0020 9342     		cmp	r3, r2
+ 728 0022 05EB010C 		add	ip, r5, r1
+ 729 0026 0CDB     		blt	.L90
+ 730 0028 BCF80080 		ldrh	r8, [ip]	@ unaligned
+ 731 002c 9E1A     		subs	r6, r3, r2
+ 732 002e 06EB4606 		add	r6, r6, r6, lsl #1
+ 733 0032 00EB060E 		add	lr, r0, r6
+ 734 0036 20F80680 		strh	r8, [r0, r6]	@ unaligned
+ 735 003a 9CF80260 		ldrb	r6, [ip, #2]	@ zero_extendqisi2
+ 736 003e 8EF80260 		strb	r6, [lr, #2]
+ 737              	.L90:
+ 738 0042 A342     		cmp	r3, r4
+ 739 0044 0AD2     		bcs	.L91
+ 740 0046 30F801E0 		ldrh	lr, [r0, r1]	@ unaligned
+ 741 004a 4618     		adds	r6, r0, r1
+ 742 004c 25F801E0 		strh	lr, [r5, r1]	@ unaligned
+ 743 0050 B178     		ldrb	r1, [r6, #2]	@ zero_extendqisi2
+ 744              	.L95:
+ 745 0052 013B     		subs	r3, r3, #1
+ 746 0054 8CF80210 		strb	r1, [ip, #2]
+ 747 0058 9BB2     		uxth	r3, r3
+ 748 005a DEE7     		b	.L93
  749              	.L91:
- 750 0044 AB42     		cmp	r3, r5
- 751 0046 28BF     		it	cs
- 752 0048 591B     		subcs	r1, r3, r5
- 753 004a 1A44     		add	r2, r2, r3
- 754 004c 2ABF     		itet	cs
- 755 004e 01EB4101 		addcs	r1, r1, r1, lsl #1
- 756 0052 8118     		addcc	r1, r0, r2
- 757 0054 0919     		addcs	r1, r1, r4
- 758 0056 B1F800C0 		ldrh	ip, [r1]	@ unaligned
- 759 005a 04EB020E 		add	lr, r4, r2
- 760 005e 24F802C0 		strh	ip, [r4, r2]	@ unaligned
- 761 0062 8A78     		ldrb	r2, [r1, #2]	@ zero_extendqisi2
- 762 0064 013B     		subs	r3, r3, #1
- 763 0066 8EF80220 		strb	r2, [lr, #2]
- 764 006a 9BB2     		uxth	r3, r3
- 765 006c D5E7     		b	.L94
- 766              	.L95:
- 767 006e 4FF0FF30 		mov	r0, #-1
- 768 0072 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
- 770              		.ident	"GCC: (15:6.3.1+svn253039-1build1) 6.3.1 20170620"
-ARM GAS  /tmp/cckPzBQj.s 			page 14
+ 750 005c 1E1B     		subs	r6, r3, r4
+ 751 005e 06EB4606 		add	r6, r6, r6, lsl #1
+ 752 0062 05EB060E 		add	lr, r5, r6
+ 753 0066 AE5B     		ldrh	r6, [r5, r6]	@ unaligned
+ 754 0068 6E52     		strh	r6, [r5, r1]	@ unaligned
+ 755 006a 9EF80210 		ldrb	r1, [lr, #2]	@ zero_extendqisi2
+ 756 006e F0E7     		b	.L95
+ 757              	.L94:
+ 758 0070 4FF0FF30 		mov	r0, #-1
+ 759 0074 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 761              		.ident	"GCC: (GNU Tools for Arm Embedded Processors 9-2019-q4-major) 9.2.1 20191025 (release) [ARM
+ARM GAS  /tmp/ccGbDiCE.s 			page 14
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 neopixel32.c
-     /tmp/cckPzBQj.s:13     .text.NP32_Init:0000000000000000 $t
-     /tmp/cckPzBQj.s:20     .text.NP32_Init:0000000000000000 NP32_Init
-     /tmp/cckPzBQj.s:52     .text.NP32_DeInit:0000000000000000 $t
-     /tmp/cckPzBQj.s:59     .text.NP32_DeInit:0000000000000000 NP32_DeInit
-     /tmp/cckPzBQj.s:73     .text.NP32_Update:0000000000000000 $t
-     /tmp/cckPzBQj.s:80     .text.NP32_Update:0000000000000000 NP32_Update
-     /tmp/cckPzBQj.s:195    .text.NP32_DMAComplete_Callback:0000000000000000 $t
-     /tmp/cckPzBQj.s:202    .text.NP32_DMAComplete_Callback:0000000000000000 NP32_DMAComplete_Callback
-     /tmp/cckPzBQj.s:214    .text.NP32_HSV_To_RGB:0000000000000000 $t
-     /tmp/cckPzBQj.s:221    .text.NP32_HSV_To_RGB:0000000000000000 NP32_HSV_To_RGB
-     /tmp/cckPzBQj.s:349    .text.NP32_SetLED_RGB:0000000000000000 $t
-     /tmp/cckPzBQj.s:356    .text.NP32_SetLED_RGB:0000000000000000 NP32_SetLED_RGB
-     /tmp/cckPzBQj.s:382    .text.NP32_SetLED_HSV:0000000000000000 $t
-     /tmp/cckPzBQj.s:389    .text.NP32_SetLED_HSV:0000000000000000 NP32_SetLED_HSV
-     /tmp/cckPzBQj.s:409    .text.NP32_SetAllLEDs_RGB:0000000000000000 $t
-     /tmp/cckPzBQj.s:416    .text.NP32_SetAllLEDs_RGB:0000000000000000 NP32_SetAllLEDs_RGB
-     /tmp/cckPzBQj.s:446    .text.NP32_SetAllLEDs_HSV:0000000000000000 $t
-     /tmp/cckPzBQj.s:453    .text.NP32_SetAllLEDs_HSV:0000000000000000 NP32_SetAllLEDs_HSV
-     /tmp/cckPzBQj.s:470    .text.NP32_SetLEDSpan_RGB:0000000000000000 $t
-     /tmp/cckPzBQj.s:477    .text.NP32_SetLEDSpan_RGB:0000000000000000 NP32_SetLEDSpan_RGB
-     /tmp/cckPzBQj.s:515    .text.NP32_SetLEDSpan_HSV:0000000000000000 $t
-     /tmp/cckPzBQj.s:522    .text.NP32_SetLEDSpan_HSV:0000000000000000 NP32_SetLEDSpan_HSV
-     /tmp/cckPzBQj.s:543    .text.NP32_ClearAllLEDs:0000000000000000 $t
-     /tmp/cckPzBQj.s:550    .text.NP32_ClearAllLEDs:0000000000000000 NP32_ClearAllLEDs
-     /tmp/cckPzBQj.s:565    .text.NP32_ShiftLeft:0000000000000000 $t
-     /tmp/cckPzBQj.s:572    .text.NP32_ShiftLeft:0000000000000000 NP32_ShiftLeft
-     /tmp/cckPzBQj.s:611    .text.NP32_ShiftRight:0000000000000000 $t
-     /tmp/cckPzBQj.s:618    .text.NP32_ShiftRight:0000000000000000 NP32_ShiftRight
-     /tmp/cckPzBQj.s:652    .text.NP32_RotateLeft:0000000000000000 $t
-     /tmp/cckPzBQj.s:659    .text.NP32_RotateLeft:0000000000000000 NP32_RotateLeft
-     /tmp/cckPzBQj.s:714    .text.NP32_RotateRight:0000000000000000 $t
-     /tmp/cckPzBQj.s:721    .text.NP32_RotateRight:0000000000000000 NP32_RotateRight
+     /tmp/ccGbDiCE.s:14     .text.NP32_Init:0000000000000000 $t
+     /tmp/ccGbDiCE.s:22     .text.NP32_Init:0000000000000000 NP32_Init
+     /tmp/ccGbDiCE.s:55     .text.NP32_DeInit:0000000000000000 $t
+     /tmp/ccGbDiCE.s:62     .text.NP32_DeInit:0000000000000000 NP32_DeInit
+     /tmp/ccGbDiCE.s:76     .text.NP32_Update:0000000000000000 $t
+     /tmp/ccGbDiCE.s:83     .text.NP32_Update:0000000000000000 NP32_Update
+     /tmp/ccGbDiCE.s:201    .text.NP32_DMAComplete_Callback:0000000000000000 $t
+     /tmp/ccGbDiCE.s:208    .text.NP32_DMAComplete_Callback:0000000000000000 NP32_DMAComplete_Callback
+     /tmp/ccGbDiCE.s:220    .text.NP32_HSV_To_RGB:0000000000000000 $t
+     /tmp/ccGbDiCE.s:227    .text.NP32_HSV_To_RGB:0000000000000000 NP32_HSV_To_RGB
+     /tmp/ccGbDiCE.s:348    .text.NP32_SetLED_RGB:0000000000000000 $t
+     /tmp/ccGbDiCE.s:355    .text.NP32_SetLED_RGB:0000000000000000 NP32_SetLED_RGB
+     /tmp/ccGbDiCE.s:380    .text.NP32_SetLED_HSV:0000000000000000 $t
+     /tmp/ccGbDiCE.s:387    .text.NP32_SetLED_HSV:0000000000000000 NP32_SetLED_HSV
+     /tmp/ccGbDiCE.s:407    .text.NP32_SetAllLEDs_RGB:0000000000000000 $t
+     /tmp/ccGbDiCE.s:414    .text.NP32_SetAllLEDs_RGB:0000000000000000 NP32_SetAllLEDs_RGB
+     /tmp/ccGbDiCE.s:442    .text.NP32_SetAllLEDs_HSV:0000000000000000 $t
+     /tmp/ccGbDiCE.s:449    .text.NP32_SetAllLEDs_HSV:0000000000000000 NP32_SetAllLEDs_HSV
+     /tmp/ccGbDiCE.s:466    .text.NP32_SetLEDSpan_RGB:0000000000000000 $t
+     /tmp/ccGbDiCE.s:473    .text.NP32_SetLEDSpan_RGB:0000000000000000 NP32_SetLEDSpan_RGB
+     /tmp/ccGbDiCE.s:508    .text.NP32_SetLEDSpan_HSV:0000000000000000 $t
+     /tmp/ccGbDiCE.s:515    .text.NP32_SetLEDSpan_HSV:0000000000000000 NP32_SetLEDSpan_HSV
+     /tmp/ccGbDiCE.s:536    .text.NP32_ClearAllLEDs:0000000000000000 $t
+     /tmp/ccGbDiCE.s:543    .text.NP32_ClearAllLEDs:0000000000000000 NP32_ClearAllLEDs
+     /tmp/ccGbDiCE.s:557    .text.NP32_ShiftLeft:0000000000000000 $t
+     /tmp/ccGbDiCE.s:564    .text.NP32_ShiftLeft:0000000000000000 NP32_ShiftLeft
+     /tmp/ccGbDiCE.s:602    .text.NP32_ShiftRight:0000000000000000 $t
+     /tmp/ccGbDiCE.s:609    .text.NP32_ShiftRight:0000000000000000 NP32_ShiftRight
+     /tmp/ccGbDiCE.s:641    .text.NP32_RotateLeft:0000000000000000 $t
+     /tmp/ccGbDiCE.s:648    .text.NP32_RotateLeft:0000000000000000 NP32_RotateLeft
+     /tmp/ccGbDiCE.s:703    .text.NP32_RotateRight:0000000000000000 $t
+     /tmp/ccGbDiCE.s:710    .text.NP32_RotateRight:0000000000000000 NP32_RotateRight
 
 UNDEFINED SYMBOLS
 calloc

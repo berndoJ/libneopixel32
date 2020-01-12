@@ -19,8 +19,6 @@ VERSION_MAJOR = 1
 VERSION_MINOR = 0
 VERSION_REV   = 0
 
-LIB_STM32HAL_INC_DIRS = -I ../libstm32f1hal/inc -I ../libstm32f1hal/cmsis/inc -I ../libstm32f1hal/config
-
 # --- COMPILER COMMANDS ---
 GCC_PREFIX = arm-none-eabi-
 GCC_CC     = $(GCC_PREFIX)gcc
@@ -46,7 +44,6 @@ C_SRC = neopixel32.c
 
 # --- INCLUDE DIRECTORIES ---
 INC  = -I ./inc
-INC += $(LIB_STM32HAL_INC_DIRS)
 
 # ------------------------------------------------------------------------------
 
