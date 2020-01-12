@@ -14,7 +14,9 @@ The compilation needs GNU-Make and the ARM embedded toolchain. (`make`, `arm-non
 
 If you are using Windows, I prefer using Ubuntu running on WSL to get a Linux build environment. (My setup is Windows, WSL, Ubuntu for Windows, Microsoft Terminal and the toolchain needed to compile)
 
-If you have any questions, feel free to contact me via Issues or via email (See my profile for the address).
+If you have any questions, feel free to contact me via the repository issues or via email (See my profile for the address).
+
+The latest build of the library can be found in the repository in the directory `/bin`. The latest compiled static library file can be found under `/bin/libneopixel32.a`.
 
 ## Future Updates
 
